@@ -1,0 +1,16 @@
+EVALUATE
+SUMMARIZECOLUMNS (
+    FactInternetSales[ProductKey],
+    DimDate[MonthNumberOfYear],
+    FILTER (
+            VALUES(FactInternetSales[ProductKey]),
+            [ProductKey] < 222
+    ),
+    "CurrentSales", SUM(FactInternetSales[SalesAmount]),
+    "LastMonthSales",
+    CALCULATE (
+        SUM(FactInternetSales[SalesAmount]),
+        INDEX(-1, ORDERBY(DimDate[MonthNumberOfYear]))
+    )
+)
+ORDER BY [ProductKey], [MonthNumberOfYear]

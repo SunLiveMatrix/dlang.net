@@ -1,0 +1,11 @@
+day Average VALUES = 
+AVERAGEX(
+    WINDOW(
+        -2,REL,0,REL,
+        SUMMARIZE(ALLSELECTED('Sales'), 'Date'[Date], 'Product'[Product]),
+        ORDERBY('Date'[Date]),
+        KEEP,
+        PARTITIONBY('Product'[Product])
+    ), 
+    CALCULATE(AVERAGE(Sales[Unit VALUES]))
+)

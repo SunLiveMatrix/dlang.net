@@ -1,0 +1,12 @@
+EVALUATE
+ADDCOLUMNS(
+    'DimGeography',
+    "UniqueRank",
+    ROWNUMBER(
+    	'DimGeography',
+    	ORDERBY(
+    		'DimGeography'[StateProvinceName], desc,
+    		'DimGeography'[City], asc),
+    	PARTITIONBY(
+    		'DimGeography'[EnglishCountryRegionName])))
+ORDER BY [EnglishCountryRegionName] asc, [StateProvinceName] desc, [City] asc

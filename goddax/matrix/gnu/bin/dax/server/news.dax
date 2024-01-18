@@ -1,0 +1,18 @@
+EVALUATE
+ADDCOLUMNS(
+    'DimGeography',
+    "Rank",
+    RANK(
+    	DENSE,
+    	'DimGeography',
+    	ORDERBY(
+    		'DimGeography'[StateProvinceName], desc,
+    		'DimGeography'[City], asc),
+        LAST,
+    	PARTITIONBY(
+    		'DimGeography'[EnglishCountryRegionName])))
+ORDER BY [EnglishCountryRegionName] asc, [StateProvinceName] desc, [City] asc    
+
+EVALUATE 
+INDEX(1, ALL(DimDate[CalendarYear]))
+    
